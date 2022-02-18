@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
@@ -13,6 +14,8 @@ public class Motor: MonoBehaviour
     GameObject meshFront;
     GameObject meshRear;
     Rigidbody ms_Rigidbody;
+    [SerializeField] TextMeshProUGUI speedometerText;
+    [SerializeField] TextMeshProUGUI rpmText;
 
     float rbVelocityMagnitude;
     float horizontalInput;
@@ -52,7 +55,9 @@ public class Motor: MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         medRPM = (frontWheel.rpm + rearWheel.rpm) / 2;
-        rbVelocityMagnitude = ms_Rigidbody.velocity.magnitude;
+        rbVelocityMagnitude = Mathf.RoundToInt(ms_Rigidbody.velocity.magnitude * 2.237f);
+        speedometerText.SetText("speed: " + rbVelocityMagnitude + "mph");
+        rpmText.SetText("RPM: " + medRPM);
 
         //motorTorque
         if (medRPM > 0)
