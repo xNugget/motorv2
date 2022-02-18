@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
@@ -17,6 +18,8 @@ public class Motor: MonoBehaviour
     float horizontalInput;
     float verticalInput;
     float medRPM;
+
+    bool alive = true;
 
     void Awake()
     {
@@ -86,6 +89,9 @@ public class Motor: MonoBehaviour
 
     void Update()
     {
+        if (!alive)
+            return;
+
         //update wheel meshes
         Vector3 temporaryVector;
         Quaternion temporaryQuaternion;
@@ -97,6 +103,9 @@ public class Motor: MonoBehaviour
         rearWheel.GetWorldPose(out temporaryVector, out temporaryQuaternion);
         meshRear.transform.position = temporaryVector;
         meshRear.transform.rotation = temporaryQuaternion;
+
+        if (transform.position.y < -5)
+            Die();
     }
 
     void Stabilizer()
@@ -186,6 +195,12 @@ public class Motor: MonoBehaviour
         meshCube.transform.parent = transform;
         meshCube.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         meshCube.transform.localScale = new Vector3(0.5f, 1.0f, 3.0f);
+    }
+
+    public void Die()
+    {
+        alive = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
 

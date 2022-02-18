@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    PlayerController playerController;
+    
+    Motor motor;
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GameObject.FindObjectOfType<PlayerController>();
+        motor = GameObject.FindObjectOfType<Motor>();
     }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.name == "Player")
         {
-            playerController.Die();
+            motor.Die();
         }
     }
 

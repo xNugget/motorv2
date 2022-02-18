@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GroundTile : MonoBehaviour
 {
+    private float xRange = 5;
     GroundSpawner groundSpawner;
     void Start()
     {
@@ -34,7 +35,7 @@ public class GroundTile : MonoBehaviour
     public GameObject coinPrefab;
     public void SpawnCoins()
     {
-        int coinToSpawn = 10;
+        int coinToSpawn = 3;
         for(int i = 0; i < coinToSpawn; i++)
         {
             GameObject temp = Instantiate(coinPrefab, transform);
@@ -44,7 +45,7 @@ public class GroundTile : MonoBehaviour
     Vector3 GetRandomPointInCollider (Collider collider)
     {
         Vector3 point = new Vector3(
-            Random.Range(collider.bounds.min.x, collider.bounds.max.x),
+            Random.Range(-xRange, xRange),
             Random.Range(collider.bounds.min.y, collider.bounds.max.y),
             Random.Range(collider.bounds.min.z, collider.bounds.max.z)
             );
