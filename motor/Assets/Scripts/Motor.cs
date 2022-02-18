@@ -5,8 +5,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
+<<<<<<< HEAD
 public class Motor: MonoBehaviour
 { 
+=======
+public class Motor : MonoBehaviour
+{
+>>>>>>> berkay
 
     WheelCollider frontWheel;
     WheelCollider rearWheel;
