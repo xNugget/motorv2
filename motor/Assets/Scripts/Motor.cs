@@ -21,7 +21,7 @@ public class Motor: MonoBehaviour
     float horizontalInput;
     float verticalInput;
     float medRPM;
-
+    float rPM;
     bool alive = true;
 
     void Awake()
@@ -57,7 +57,8 @@ public class Motor: MonoBehaviour
         medRPM = (frontWheel.rpm + rearWheel.rpm) / 2;
         rbVelocityMagnitude = Mathf.RoundToInt(ms_Rigidbody.velocity.magnitude * 2.237f);
         speedmeterText.SetText("Speed: " + rbVelocityMagnitude + "mph");
-        rpmText.SetText("RPM: " + medRPM);
+        rPM = (rbVelocityMagnitude % 30) * 40;
+        rpmText.SetText("RPM: " + rPM);
         
 
 
